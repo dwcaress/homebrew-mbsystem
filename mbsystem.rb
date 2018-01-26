@@ -38,7 +38,7 @@ class Mbsystem < Formula
   end
 
   def caveats
-    <<-EOS.undent
+    <<~EOS
 
       The GMT_CUSTOM_LIBS needs to be set for all users
       on this computer that want to use mbsystem. Run the
