@@ -34,7 +34,7 @@ class Otps < Formula
   end
 
   def caveats
-    <<-EOS.undent
+    <<~EOS
 
       Please install a tide model.
       E.g. use '--with-tpxo8' to install
