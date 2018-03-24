@@ -17,7 +17,7 @@ The MB-System project is maintaining this separate homebrew tap because this pac
 
 `brew install mbsystem`
 
-You can also install MB-System directly, but this will install OTPS without a tide model and you need to add your own. Or you can install MB-System `--without-otps` if tide prediction is not needed.
+You can also install MB-System directly, but this will install OTPS without a tide model and you need to add your own.
 
 ## GMT compatibility:
 
