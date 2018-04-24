@@ -24,7 +24,7 @@ class Otps < Formula
       (prefix/"DATA").install resource("tpxo8")
 
       link = open("#{prefix}/DATA/Model_atlas_v1", "w")
-      link.write <<-EOS.undent
+      link.write <<~EOS
         #{prefix}/DATA/hf.tpxo8_atlas_30_v1
         #{prefix}/DATA/uv.tpxo8_atlas_30_v1
         #{prefix}/DATA/grid_tpxo8atlas_30_v1
