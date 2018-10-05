@@ -14,6 +14,8 @@ class Otps < Formula
   end
 
   def install
+    system "pwd" 
+    system "ls -a"
     system "make", "extract_HC"
     system "make", "predict_tide"
     system "make", "extract_local_model"
