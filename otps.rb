@@ -16,7 +16,7 @@ class Otps < Formula
   def install
     system "pwd" 
     system "ls", "-a"
-    system "tar", "xvzf", "OTPS2.tar.Z"
+    system "tar", "xvzf", "OTPS--2.tar.Z"
     system "cd", "OTPS2"
     system "ls", "-a"
     system "make", "extract_HC"
