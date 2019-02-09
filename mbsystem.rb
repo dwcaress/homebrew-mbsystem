@@ -10,7 +10,6 @@ class Mbsystem < Formula
   depends_on "netcdf"
   depends_on "proj"
   depends_on "fftw"
-  depends_on "denismm/gv/gv"
   depends_on "openmotif"
   depends_on "dwcaress/mbsystem/otps"
   option "withgvout-check", "Disable build time checks (not recommended)"
