@@ -28,4 +28,5 @@ MB-System depends on the GMT package at https://github.com/GenericMappingTools/g
 Once the incompatibility is resolved with a new MB-System release, gmt can then be upgraded by unpinning and upgrading it.
 
 `brew unpin gmt`
+
 `brew upgrade gmt`
