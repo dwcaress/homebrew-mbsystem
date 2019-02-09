@@ -1,15 +1,15 @@
 class MbsystemBeta < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for test distributions)"
   homepage "http://www.mbari.org/products/research-software/mb-system/"
-  url "ftp://mbsystemftp@ftp.mbari.org/MB-System-5.7.1.tar.gz"
-  sha256 "f6027fc16d0b0bbcbb4774925c77dd6b07c509cb7d3dffd424faa7496bbde579"
+  url ""
+  sha256 "42e8504e48ccfd7ae9b37fc6bda8b4d264156f617fc6626cad50779875bc6b67"
 
   depends_on :x11
   depends_on "gmt"
   depends_on "gdal"
   depends_on "netcdf"
   depends_on "proj"
-  depends_on "fftw"
+  depends_on "fftw"ftp://mbsystemftp@ftp.mbari.org/MB-System-5.7.3.tar.gz
   depends_on "openmotif"
   depends_on "dwcaress/mbsystem/otps"
   option "without-check", "Disable build time checks (not recommended)"
