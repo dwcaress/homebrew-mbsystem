@@ -1,7 +1,7 @@
 class MbsystemBeta < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for test distributions)"
   homepage "http://www.mbari.org/products/research-software/mb-system/"
-  url ""
+  url "https://github.com/dwcaress/MB-System/archive/5.7.4.tar.gz"
   sha256 "53fbfbc5f9917725d978c9e4944fc503e07f3a40ca37fd70fad86e2b0548cb50"
 
   depends_on :x11
@@ -12,7 +12,7 @@ class MbsystemBeta < Formula
   depends_on "fftw"
   depends_on "openmotif"
   depends_on "dwcaress/mbsystem/otps"
-  option "without-check", "Disable build time checks (nothttps://github.com/dwcaress/MB-System/archive/5.7.4.tar.gz recommended)"
+  option "without-check", "Disable build time checks ( recommended)"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-beta share the same commands'
 
   def install
