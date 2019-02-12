@@ -12,7 +12,7 @@ class MbsystemBeta < Formula
   depends_on "fftw"
   depends_on "openmotif"
   depends_on "dwcaress/mbsystem/otps"
-  option "without-check", "Disable build time checks ( recommended)"
+  option "without-check", "Disable build time checks (not recommended)"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-beta share the same commands'
 
   def install
