@@ -7,7 +7,11 @@ http://www.mbari.org/products/research-software/mb-system/
 
 The MB-System project is maintaining this separate homebrew tap because this package is frequently updated and has a dependency, OTPS (tidal prediction software), that is not available through the core homebrew repositories. 
 
+There are two MB-System packages available: mbsystem and mbsystem-beta. The first (mbsystem) installs the most recent major (stable) release from the Github repository. The second (mbsystem-beta) installs the most recent release whether it is major (stable) or beta (unstable). The MB-System development team uses beta releases for testing of new features and bug fixes. We do not recommend installing mbsystem-beta releases unless you are involved in the testing or the release includes bug fixes or new features that are directly relevant to you.
+
 ## Install:
+
+To install the mbsystem package with full tide modeling:
 
 `brew update`
 
@@ -17,7 +21,29 @@ The MB-System project is maintaining this separate homebrew tap because this pac
 
 `brew install mbsystem`
 
-You can also install MB-System directly, but this will install OTPS without a tide model and you need to add your own.
+To install the mbsystem-beta package with full tide modeling:
+
+`brew update`
+
+`brew tap dwcaress/mbsystem`
+
+`brew install otps --with-tpxo8`
+
+`brew install mbsystem-beta`
+
+To switch between mbsystem and mbsystem-beta installations, first uninstall the current package before installing the one you want, e.g.:
+
+`brew uninstall mbsystem`
+
+`brew install mbsystem-beta`
+
+or:
+
+`brew uninstall mbsystem-beta`
+
+`brew install mbsystem`
+
+If you want to install and use a tide model other than tpxo8, then install MB-System without doing the opts install first. The  otps package will then be installed without a tide model (and you will have to install your own following the instructions at http://volkov.oce.orst.edu/tides/global.html).
 
 ## GMT compatibility:
 
