@@ -41,12 +41,12 @@ class MbsystemBeta < Formula
       The GMT_CUSTOM_LIBS needs to be set for all users
       on this computer that want to use mbsystem. Run the
       following command within the home directory:
-          gmtset GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.so
+          gmt gmtset GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.so
       Additionally, if not already done within the gmt
       installation, the directories for DCW and GSHHG (borders,
       coast lines, rivers, etc.) need to be set:
-          gmtset DIR_DCW #{HOMEBREW_PREFIX}/share/gmt/dcw
-          gmtset DIR_GSHHG #{HOMEBREW_PREFIX}/share/gmt/coast
+          gmt gmtset DIR_DCW #{HOMEBREW_PREFIX}/share/gmt/dcw
+          gmt gmtset DIR_GSHHG #{HOMEBREW_PREFIX}/share/gmt/coast
     EOS
   end
 end
