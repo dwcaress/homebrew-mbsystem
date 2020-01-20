@@ -17,7 +17,7 @@ To install the mbsystem package with full tide modeling:
 
 `brew tap dwcaress/mbsystem`
 
-`brew install otps --with-tpxo8`
+`brew install otps
 
 `brew install mbsystem`
 
@@ -27,7 +27,7 @@ To install the mbsystem-beta package with full tide modeling:
 
 `brew tap dwcaress/mbsystem`
 
-`brew install otps --with-tpxo8`
+`brew install otps
 
 `brew install mbsystem-beta`
 
@@ -43,7 +43,27 @@ or:
 
 `brew install mbsystem`
 
-If you want to install and use a tide model other than tpxo8, then install MB-System without doing the opts install first. The  otps package will then be installed without a tide model (and you will have to install your own following the instructions at http://volkov.oce.orst.edu/tides/global.html).
+# OTPS Tide Models
+The dwcaress/otps formula will build the OTPS2 software in the directory /usr/local/Cellar/otps/2/
+and make a link named /usr/local/opt/otps to this directory. In the past, the TPXO8_atlas_v1
+tidal model was also installed in this location. However, the OSU tide group no longer makes 
+their TPXO tidal models openly available for download. Consequently, this formula now installs 
+the OTPS2 software required for the MB-System program mbotps to work, but not the associated 
+tidal model. 
+Academic users can register and request access to the TPXO8-atlas or TPXO9-atlas models
+used by mbotps at this website:
+  https://www.tpxo.net
+If, for instance, you obtain the TPXO8_atlas_v1 model, it will come in the form of three files:
+  hf.tpxo8_atlas_30_v1
+  uv.tpxo8_atlas_30_v1
+  grid_tpxo8_atlas_30_v1
+Place those three files into a directory /usr/local/Cellar/otps/2/DATA/ and create in that
+directory a file named Model_atlas_v1 with three lines:
+  /usr/local/Cellar/otps/2/DATA/hf.tpxo8_atlas_30_v1
+  /usr/local/Cellar/otps/2/DATA/uv.tpxo8_atlas_30_v1
+  /usr/local/Cellar/otps/2/DATA/grid_tpxo8_atlas_30_v1
+If you obtain the newer TPXO9_atlas model, put the files in the same place and make an
+appropriately named model file specifying the full path to each model file.
 
 ## GMT compatibility:
 
