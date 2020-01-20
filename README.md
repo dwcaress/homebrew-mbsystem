@@ -43,7 +43,7 @@ or:
 
 `brew install mbsystem`
 
-# OTPS Tide Models
+## OTPS Tide Models
 The dwcaress/otps formula will build the OTPS2 software in the directory /usr/local/Cellar/otps/2/
 and make a link named /usr/local/opt/otps to this directory. In the past, the TPXO8_atlas_v1
 tidal model was also installed in this location. However, the OSU tide group no longer makes 
