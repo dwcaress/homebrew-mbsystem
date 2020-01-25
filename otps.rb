@@ -1,7 +1,9 @@
 class Otps < Formula
   desc "OTPS: OSU Tidal Prediction Software"
   homepage "http://volkov.oce.orst.edu/tides/otps.html"
-  url "ftp://anonymous:anonymous%40homebrew.com@ftp.oce.orst.edu/dist/tides/OTPS2.tar.Z"
+  #url "ftp://anonymous:anonymous%40homebrew.com@ftp.oce.orst.edu/dist/tides/OTPS2.tar.Z"
+  #url "https://drive.google.com/open?id=1b38F5qUPnQA6kWkoQ_BofTIo6sawGDCH"
+  url "https://drive.google.com/uc?export=download&confirm=3L5h&id=1b38F5qUPnQA6kWkoQ_BofTIo6sawGDCH"
   sha256 "5ac90789e4765da9efeeb2823ac713b12b30c0ad1e8d8b10514f591137f56329"
 
   # option "with-tpxo8", "Install TPXO8-atlas-compact tide model"
