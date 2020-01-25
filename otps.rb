@@ -1,7 +1,8 @@
 class Otps < Formula
   desc "OTPS: OSU Tidal Prediction Software"
   homepage "https://www.tpxo.net/otps"
-  url "ftp://mbsystemftp@ftp.mbari.org/OTPS_2018.tar.gz"
+  #url "ftp://mbsystemftp@ftp.mbari.org/OTPS_2018.tar.gz"
+  url "ftp://anonymous@ftp.mbari.org/pub/Caress/OTPS/OTPS_2018.tar.gz"
   sha256 "6f4f84306977df72f9d659fcadad37c7bdc92db6e33eeec8614566fa390c8fdf"
 
   # option "with-tpxo8", "Install TPXO8-atlas-compact tide model"
