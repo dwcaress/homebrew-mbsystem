@@ -1,62 +1,64 @@
 class Otps < Formula
-  desc "OTPS: OSU Tidal Prediction Software"
+  desc "OTPS: Oregon State University Tidal Prediction Software"
   homepage "https://www.tpxo.net/otps"
   #url "ftp://mbsystemftp@ftp.mbari.org/OTPS_2018.tar.gz"
   url "ftp://anonymous@ftp.mbari.org/pub/Caress/OTPS/OTPS_2018.tar.gz"
   sha256 "b8a135813735ace565ccd91b6b011ed397c841da1928fee00a2cf5e7efa48137"
 
-  # option "with-tpxo8", "Install TPXO8-atlas-compact tide model"
-
   depends_on "gcc"
-
-  # resource "tpxo8" do
-  #   url "ftp://anonymous:anonymous%40homebrew.com@ftp.oce.orst.edu/dist/tides/TPXO8_compact/tpxo8_atlas_compact_v1.tar.Z"
-  #   sha256 "80f0517b2df5ec8b2fbb811f818fd6c2e38c0909313efe1b05a30728dec45491"
-  # end
 
   def install
     system "make", "extract_HC"
     system "make", "predict_tide"
     system "make", "extract_local_model"
-
     prefix.install Dir["*"]
-
-    # if build.with? "tpxo8"
-    #   (prefix/"DATA").install resource("tpxo8")
-
-    #   link = open("#{prefix}/DATA/Model_atlas_v1", "w")
-    #   link.write <<~EOS
-    #     #{prefix}/DATA/hf.tpxo8_atlas_30_v1
-    #     #{prefix}/DATA/uv.tpxo8_atlas_30_v1
-    #     #{prefix}/DATA/grid_tpxo8atlas_30_v1
-    #   EOS
-    #   link.close
-    # end
   end
 
   def caveats
     <<~EOS
-      This formula should have built the OTPS2 software in the directory /usr/local/Cellar/otps/2/
-      and made a link named /usr/local/opt/otps to this directory. In the past, the TPXO8_atlas_v1
-      tidal model was also installed in this location. However, the OSU tide group no longer makes 
+      This formula has built the 2018 version of OTPS software from the Oregon State University
+      Tide Group in the directory /usr/local/Cellar/otps/2018/
+      and made a link named /usr/local/opt/otps to this directory. This sofware is described at:
+        https://www.tpxo.net/otps
+      In the past, this private Homebrew formula installed the TPXO8_atlas_v1
+      tidal model along with the software. However, as of mid-2019 the Oregon State University tide group no longer makes 
       their TPXO tidal models openly available for download. Consequently, this formula now installs 
-      the OTPS2 software required for the MB-System program mbotps to work, but not the associated 
-      tidal model. 
-      Academic users can register and request access to the TPXO8-atlas or TPXO9-atlas models
-      used by mbotps at this website:
+      the OTPS software required for the MB-System program mbotps to work, but not the associated 
+      tidal model. The program mbotps is currently set up to work with the TPXO9-atlas global tide model,
+      which is their latest 1/30 degree resolution fully global solution, obtained by combining 
+      a 1/6 degree base global solution (TPXO9.v1) with thirty 1/30 degree resolution local solutions 
+      covering all coastal areas, including the Arctic and the Antarctic. 
+      Academic users can register and request access to the TPXO9-atlas model files at this website:
         https://www.tpxo.net
-      If, for instance, you obtain the TPXO8_atlas_v1 model, it will come in the form of three
-      files:
-        hf.tpxo8_atlas_30_v1
-        uv.tpxo8_atlas_30_v1
-        grid_tpxo8_atlas_30_v1
-      Place those three files into a directory /usr/local/Cellar/otps/2/DATA/ and create in that
-      directory a file named Model_atlas_v1 with three lines:
-        /usr/local/Cellar/otps/2/DATA/hf.tpxo8_atlas_30_v1
-        /usr/local/Cellar/otps/2/DATA/uv.tpxo8_atlas_30_v1
-        /usr/local/Cellar/otps/2/DATA/grid_tpxo8_atlas_30_v1
-      If you obtain the newer TPXO9_atlas model, put the files in the same place and make an
-      appropriately named model file specifying the full path to each model file.
+      There are 25 model files:
+        grid_tpxo9_atlas_30
+        h_2n2_tpxo9_atlas_30
+        h_k1_tpxo9_atlas_30
+        h_k2_tpxo9_atlas_30
+        h_m2_tpxo9_atlas_30
+        h_m4_tpxo9_atlas_30
+        h_mn4_tpxo9_atlas_30
+        h_ms4_tpxo9_atlas_30
+        h_n2_tpxo9_atlas_30
+        h_o1_tpxo9_atlas_30
+        h_p1_tpxo9_atlas_30
+        h_q1_tpxo9_atlas_30
+        h_s2_tpxo9_atlas_30
+        u_2n2_tpxo9_atlas_30
+        u_k1_tpxo9_atlas_30
+        u_k2_tpxo9_atlas_30
+        u_m2_tpxo9_atlas_30
+        u_m4_tpxo9_atlas_30
+        u_mn4_tpxo9_atlas_30
+        u_ms4_tpxo9_atlas_30
+        u_n2_tpxo9_atlas_30
+        u_o1_tpxo9_atlas_30
+        u_p1_tpxo9_atlas_30
+        u_q1_tpxo9_atlas_30
+        u_s2_tpxo9_atlas_30
+      The h_*_tpxo9_atlas_30 and grid_tpxo9_atlas_30 files are 47 MB each, and the u_*_tpxo9_atlas_30 files are 93 MB each.
+      These files should all be placed into the directory /usr/local/opt/otps/DATA/ - once these files are present, the 
+      combination of mbotps and opts/predict_tide should work. See the mbotps manual page for details.
     EOS
   end
 
