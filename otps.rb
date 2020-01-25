@@ -3,7 +3,7 @@ class Otps < Formula
   homepage "https://www.tpxo.net/otps"
   #url "ftp://mbsystemftp@ftp.mbari.org/OTPS_2018.tar.gz"
   url "ftp://anonymous@ftp.mbari.org/pub/Caress/OTPS/OTPS_2018.tar.gz"
-  sha256 "6f4f84306977df72f9d659fcadad37c7bdc92db6e33eeec8614566fa390c8fdf"
+  sha256 "b8a135813735ace565ccd91b6b011ed397c841da1928fee00a2cf5e7efa48137"
 
   # option "with-tpxo8", "Install TPXO8-atlas-compact tide model"
 
