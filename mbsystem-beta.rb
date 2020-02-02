@@ -2,7 +2,7 @@ class MbsystemBeta < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for test distributions)"
   homepage "http://www.mbari.org/products/research-software/mb-system/"
   url "https://github.com/dwcaress/MB-System/archive/5.7.6beta26.tar.gz"
-  sha256 "95899a6f439eb985c901204e62567aa2be895236b24a241219b620165925fe4a"
+  sha256 "3d3470b20e24d8953224035b90f274eaf38e0ec7e8d6012f5f8ae12ca9e92e2f"
 
   depends_on :x11
   depends_on "gmt"
