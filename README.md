@@ -71,6 +71,58 @@ directory a file named Model_atlas_v1 with three lines:
 If you obtain the newer TPXO9_atlas model, put the files in the same place and make an
 appropriately named model file specifying the full path to each model file.
 
+
+This formula will build the 2018 version of OTPS software from the Oregon
+State University Tide Group in the directory 
+  /usr/local/Cellar/otps/2018/
+and made a link named /usr/local/opt/otps to this directory. This software
+is described at:
+    https://www.tpxo.net/otps
+In the past, this private Homebrew formula installed the TPXO8_atlas_v1
+tidal model along with the software. However, as of mid-2019 the Oregon 
+State University tide group no longer makes their TPXO tidal models openly 
+available for download. Consequently, this formula now installs  the OTPS 
+software required for the MB-System program mbotps to work, but not the 
+associated tidal model. The program mbotps is currently set up to work 
+with the TPXO9-atlas global tide model,which is their latest 1/30 degree 
+resolution fully global solution, obtained by combining  a 1/6 degree base 
+global solution (TPXO9.v1) with thirty 1/30 degree resolution local solutions 
+covering all coastal areas, including the Arctic and the Antarctic. 
+Academic users can register and request access to the TPXO9-atlas model 
+files at this website:
+    https://www.tpxo.net
+There are 25 model files:
+    grid_tpxo9_atlas_30
+    h_2n2_tpxo9_atlas_30
+    h_k1_tpxo9_atlas_30
+    h_k2_tpxo9_atlas_30
+    h_m2_tpxo9_atlas_30
+    h_m4_tpxo9_atlas_30
+    h_mn4_tpxo9_atlas_30
+    h_ms4_tpxo9_atlas_30
+    h_n2_tpxo9_atlas_30
+    h_o1_tpxo9_atlas_30
+    h_p1_tpxo9_atlas_30
+    h_q1_tpxo9_atlas_30
+    h_s2_tpxo9_atlas_30
+    u_2n2_tpxo9_atlas_30
+    u_k1_tpxo9_atlas_30
+    u_k2_tpxo9_atlas_30
+    u_m2_tpxo9_atlas_30
+    u_m4_tpxo9_atlas_30
+    u_mn4_tpxo9_atlas_30
+    u_ms4_tpxo9_atlas_30
+    u_n2_tpxo9_atlas_30
+    u_o1_tpxo9_atlas_30
+    u_p1_tpxo9_atlas_30
+    u_q1_tpxo9_atlas_30
+    u_s2_tpxo9_atlas_30
+The h_&ast;_tpxo9_atlas_30 and grid_tpxo9_atlas_30 files are 47 MB each, and 
+the u_&ast;_tpxo9_atlas_30 files are 93 MB each. These files should all be 
+placed into the directory /usr/local/opt/otps/DATA/ - once these files 
+are present, the combination of mbotps and opts/predict_tide should work. 
+See the mbotps manual page for details.
+
 ## GMT compatibility:
 
 MB-System depends on the GMT package at https://github.com/GenericMappingTools/gmt, which is being actively developed and updated. Although the GMT team keeps the MB-System team apprised of upcoming changes, it has happened that a GMT release broke elements of the then-current MB-System release. In the event that a new GMT release is not backwards compatible with the current mbsystem-gmt-modules, one can prevent homebrew from updating gmt within the 'brew upgrade‘ command by pinning it.
