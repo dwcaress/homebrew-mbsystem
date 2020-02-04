@@ -97,8 +97,8 @@ There are 25 model files:
     u_q1_tpxo9_atlas_30
     u_s2_tpxo9_atlas_30
 
-The h_\*_tpxo9_atlas_30 and grid_tpxo9_atlas_30 files are 47 MB each, and 
-the u_\*_tpxo9_atlas_30 files are 93 MB each. These files should all be 
+The h_\**_tpxo9_atlas_30 and grid_tpxo9_atlas_30 files are 47 MB each, and 
+the u_\**_tpxo9_atlas_30 files are 93 MB each. These files should all be 
 placed into the directory /usr/local/opt/otps/DATA/ - once these files 
 are present, the combination of mbotps and opts/predict_tide should work. 
 See the mbotps manual page for details.
