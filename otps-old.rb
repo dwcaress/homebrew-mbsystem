@@ -2,7 +2,7 @@ class OtpsOld < Formula
   desc "OTPS: OSU Tidal Prediction Software"
   homepage "http://volkov.oce.orst.edu/tides/otps.html"
   url "ftp://mbsystemftp@ftp.mbari.org/OTPS2.tar.Z"
-  sha256 "5ac90789e4765da9efeeb2823ac713b12b30c0ad1e8d8b10514f591137f56329"
+  sha256 "c3e15679515e6e358d173eb9b46276c51ceb5bcd80ecb50822030e1d2900c361"
 
   option "with-tpxo8", "Install TPXO8-atlas-compact tide model"
 
