@@ -1,4 +1,4 @@
-class Otps < Formula
+class OtpsOld < Formula
   desc "OTPS: OSU Tidal Prediction Software"
   homepage "http://volkov.oce.orst.edu/tides/otps.html"
   url "ftp://mbsystemftp@ftp.mbari.org/OTPS2.tar.Z"
