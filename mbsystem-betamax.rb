@@ -1,8 +1,8 @@
 class MbsystemBetamax < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for test distributions)"
   homepage "http://www.mbari.org/products/research-software/mb-system/"
-  url "https://github.com/dwcaress/MB-System/archive/5.7.6beta38.tar.gz"
-  sha256 "fb410237c4a927afc621e48ef183a6445e58207b3b007b0c1ad78f073980ca95"
+  url "https://github.com/dwcaress/MB-System/archive/5.7.6beta39.tar.gz"
+  sha256 "2f50581cb6450473922b34ecb9fce71d9e14f22b58963b01877f3fbc672dd00a"
 
   depends_on :x11
   depends_on "gmt"
@@ -12,8 +12,8 @@ class MbsystemBetamax < Formula
   depends_on "fftw"
   depends_on "openmotif"
   depends_on "opencv"
-  depends_on "dwcaress/mbsystem/otps"
   depends_on "qt"
+  depends_on "dwcaress/mbsystem/otps"
   option "without-check", "Disable build time checks (not recommended)"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-betamax share the same commands'
   conflicts_with 'dwcaress/mbsystem/mbsystem-beta', :because => 'mbsystem-beta and mbsystem-betamax share the same commands'
