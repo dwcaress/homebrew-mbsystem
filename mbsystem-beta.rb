@@ -14,6 +14,7 @@ class MbsystemBeta < Formula
   depends_on "dwcaress/mbsystem/otps"
   option "without-check", "Disable build time checks (not recommended)"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-beta share the same commands'
+  conflicts_with 'dwcaress/mbsystem/mbsystem-betamax', :because => 'mbsystem-betamax and mbsystem-beta share the same commands'
 
   def install
     args = [
