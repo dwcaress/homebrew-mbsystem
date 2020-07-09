@@ -37,7 +37,7 @@ class MbsystemBetamax < Formula
       "--enable-mbtnav",
       "--enable-qt",
       "--enable-opencv",
-      "--with-opencv-include=#{Formula["opencv"].opt_include}",
+      "--with-opencv-include=#{Formula["opencv"].opt_include}/opencv4",
       "--with-opencv-lib=#{Formula["opencv"].opt_lib}"
     ]
 
