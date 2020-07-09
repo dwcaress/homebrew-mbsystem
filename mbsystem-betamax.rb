@@ -29,6 +29,8 @@ class MbsystemBetamax < Formula
       "--with-fftw-include=#{Formula["fftw"].opt_include}",
       "--with-motif-lib=#{Formula["openmotif"].opt_lib}",
       "--with-motif-include=#{Formula["openmotif"].opt_include}",
+      "--with-opengl-include=#{Formula["opengl"].opt_include}",
+      "--with-opengl-lib=#{Formula["opengl"].opt_lib}",
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
       "--with-otps-dir=/usr/local/opt/otps",
       "--enable-hardening",
