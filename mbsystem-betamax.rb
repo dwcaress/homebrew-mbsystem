@@ -32,10 +32,12 @@ class MbsystemBetamax < Formula
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
       "--with-otps-dir=/usr/local/opt/otps",
       "--enable-hardening",
-      "--enable-opencv",
+      "--enable-mbtrn",
+      "--enable-mbtnav",
+      "--enable-qt",
       "--with-opengl-include=/opt/X11/include",
       "--with-opengl-lib=/opt/X11/lib",
-      "--enable-qt",
+      "--enable-opencv",
       "--with-opencv-include=#{Formula["opencv"].opt_include}/opencv4",
       "--with-opencv-lib=#{Formula["opencv"].opt_lib}"
     ]
