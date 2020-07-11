@@ -1,7 +1,7 @@
 class Otps < Formula
   desc "OTPS: Oregon State University Tidal Prediction Software"
   homepage "https://www.tpxo.net/otps"
-  url "ftp://mbsystemftp@ftp.mbari.org/OTPS_2018.tar.gz"
+  url "ftp://mbsystemftp@ftp.mbari.org/OTPS_202007.tar.gz"
   sha256 "b8a135813735ace565ccd91b6b011ed397c841da1928fee00a2cf5e7efa48137"
 
   depends_on "gcc"
