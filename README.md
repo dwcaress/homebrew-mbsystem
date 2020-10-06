@@ -39,7 +39,7 @@ or:
 
 `brew install mbsystem`
 
-## OTPS Tide Models
+## OTPS Tide Models:
 
 The MB-System tide modeling program mbotps will only function if the tidal 
 prediction software package called OTPS is also installed, along with files 
