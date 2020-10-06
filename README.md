@@ -11,17 +11,15 @@ There are two MB-System packages available: mbsystem and mbsystem-beta. The firs
 
 ## Install:
 
-To install the mbsystem package with full tide modeling:
+To install the mbsystem package with a capability for tide modeling (if  a model installed separately, see below):
 
 `brew update`
 
 `brew tap dwcaress/mbsystem`
 
-`brew install otps`
-
 `brew install mbsystem`
 
-To install the mbsystem-beta package with full tide modeling:
+To install the mbsystem-beta package with tide modeling:
 
 `brew update`
 
@@ -44,22 +42,21 @@ or:
 `brew install mbsystem`
 
 ## OTPS Tide Models
-This formula will build the 2018 version of OTPS software from the Oregon
-State University Tide Group in the directory 
 
-  /usr/local/Cellar/otps/2018/
-  
-and made a link named /usr/local/opt/otps to this directory. This software
-is described at:
-
-    https://www.tpxo.net/otps
+The MB-System tide modeling program mbotps will only function if the tidal 
+prediction software package called OTPS is also installed, along with files 
+comprising a global tide model. OTPS and the global tide models it uses to 
+predict tides are products of the Oregon State University Tide Group.
+We provide a homebrew formula for OTPS in the MB-System tap. 
     
 In the past, this private Homebrew formula installed the TPXO8_atlas_v1
 tidal model along with the software. However, as of mid-2019 the Oregon 
 State University tide group no longer makes their TPXO tidal models openly 
 available for download. Consequently, this formula now installs  the OTPS 
 software required for the MB-System program mbotps to work, but not the 
-associated tidal model. The program mbotps is currently set up to work 
+associated tidal model. 
+
+The program mbotps is currently set up to work 
 with the TPXO9-atlas global tide model,which is their latest 1/30 degree 
 resolution fully global solution, obtained by combining  a 1/6 degree base 
 global solution (TPXO9.v1) with thirty 1/30 degree resolution local solutions 
