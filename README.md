@@ -17,7 +17,7 @@ To install the mbsystem package with full tide modeling:
 
 `brew tap dwcaress/mbsystem`
 
-`brew install otps
+`brew install otps`
 
 `brew install mbsystem`
 
