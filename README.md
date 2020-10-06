@@ -11,7 +11,7 @@ There are two MB-System packages available: mbsystem and mbsystem-beta. The firs
 
 ## Install:
 
-To install the mbsystem package with a capability for tide modeling (if  a model installed separately, see below):
+To install the mbsystem package:
 
 `brew update`
 
@@ -19,13 +19,11 @@ To install the mbsystem package with a capability for tide modeling (if  a model
 
 `brew install mbsystem`
 
-To install the mbsystem-beta package with tide modeling:
+To install the mbsystem-beta package:
 
 `brew update`
 
 `brew tap dwcaress/mbsystem`
-
-`brew install otps
 
 `brew install mbsystem-beta`
 
@@ -48,7 +46,13 @@ prediction software package called OTPS is also installed, along with files
 comprising a global tide model. OTPS and the global tide models it uses to 
 predict tides are products of the Oregon State University Tide Group.
 We provide a homebrew formula for OTPS in the MB-System tap. 
-    
+
+`brew update`
+
+`brew tap dwcaress/mbsystem`
+
+`brew install otps`
+
 In the past, this private Homebrew formula installed the TPXO8_atlas_v1
 tidal model along with the software. However, as of mid-2019 the Oregon 
 State University tide group no longer makes their TPXO tidal models openly 
