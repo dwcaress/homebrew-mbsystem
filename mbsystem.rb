@@ -2,7 +2,7 @@ class Mbsystem < Formula
   desc "MB-System seafloor mapping software"
   homepage "http://www.mbari.org/products/research-software/mb-system/"
   url "https://github.com/dwcaress/MB-System/archive/5.7.6.tar.gz"
-  sha256 "8047073422a53522a5a439758960773dc0448507c3a85bf6ab42b84a9d469373"
+  sha256 "472dfa863905e27c0484f49ba90650bd1c743798d001e0a2a275d0d8c05ffab9"
 
   depends_on :x11
   depends_on "gmt"
