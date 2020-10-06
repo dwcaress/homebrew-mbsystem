@@ -68,7 +68,7 @@ covering all coastal areas, including the Arctic and the Antarctic.
 Academic users can register and request access to the TPXO9-atlas model 
 files at this website:
 
-    https://www.tpxo.net
+https://www.tpxo.net
 
 There are 25 model files:
 
