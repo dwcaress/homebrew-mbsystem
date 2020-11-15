@@ -10,7 +10,7 @@ class MbsystemBetamax < Formula
   depends_on "netcdf"
   depends_on "proj"
   depends_on "fftw"
-  depends_on "openmotif"
+  depends_on "mbopenmotif"
   depends_on "opencv"
   depends_on "qt"
   depends_on "dwcaress/mbsystem/otps"
