@@ -1,4 +1,4 @@
-class Openmotif < Formula
+class Mbopenmotif < Formula
   desc "LGPL release of the Motif toolkit"
   homepage "https://motif.ics.com/motif"
   url "https://downloads.sourceforge.net/project/motif/Motif%202.3.8%20Source%20Code/motif-2.3.8.tar.gz"
