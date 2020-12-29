@@ -4,7 +4,8 @@ class MbsystemBetamax < Formula
   url "https://github.com/dwcaress/MB-System/archive/5.7.7beta05.tar.gz"
   sha256 "443574920f06f304da786856f7b143b764af26bcd2ca86c3b08a1fb5b26d7459"
 
-  depends_on :x11
+  env :std
+  
   depends_on "gmt"
   depends_on "gdal"
   depends_on "netcdf"
@@ -42,7 +43,7 @@ class MbsystemBetamax < Formula
       "--with-opencv-lib=#{Formula["opencv"].opt_lib}"
     ]
 
-    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
+    ENV['CFLAGS']="-I/usr/X11/include -L/usr/X11/lib"
 
     system "./configure", *args
     system "make", "check" if build.with? "check"
