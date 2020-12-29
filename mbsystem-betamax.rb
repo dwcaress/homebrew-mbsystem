@@ -35,7 +35,6 @@ class MbsystemBetamax < Formula
       "--enable-hardening",
       "--enable-mbtrn",
       "--enable-mbtnav",
-      "--enable-qt",
       "--with-opengl-include=/opt/X11/include",
       "--with-opengl-lib=/opt/X11/lib",
       "--enable-opencv",
