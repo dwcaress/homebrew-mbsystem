@@ -14,6 +14,7 @@ class Mbopenmotif < Formula
   depends_on "freetype"
   depends_on "jpeg"
   depends_on "libpng"
+  depends_on "xquartz"
 
   conflicts_with "lesstif",
     because: "both Lesstif and Openmotif are complete replacements for each other"
