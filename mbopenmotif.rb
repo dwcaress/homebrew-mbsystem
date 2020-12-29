@@ -25,6 +25,9 @@ class Mbopenmotif < Formula
     system "./configure", "--prefix=#{prefix}",
                           "--disable-dependency-tracking",
                           "--disable-silent-rules"
+
+    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
+
     system "make"
     system "make", "install"
 
