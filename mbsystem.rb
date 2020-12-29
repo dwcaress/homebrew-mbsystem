@@ -4,7 +4,8 @@ class Mbsystem < Formula
   url "https://github.com/dwcaress/MB-System/archive/5.7.6.tar.gz"
   sha256 "472dfa863905e27c0484f49ba90650bd1c743798d001e0a2a275d0d8c05ffab9"
 
-  depends_on :x11
+  env :std
+  
   depends_on "gmt"
   depends_on "gdal"
   depends_on "netcdf"
@@ -30,7 +31,7 @@ class Mbsystem < Formula
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}"
     ]
 
-    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
+    ENV['CFLAGS']="-I/usr/X11/include -L/usr/X11/lib"
 
     system "./configure", *args
     system "make", "check" if build.with? "check"
