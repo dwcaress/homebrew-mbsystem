@@ -10,7 +10,7 @@ class MbsystemBetamax < Formula
   depends_on "netcdf"
   depends_on "proj"
   depends_on "fftw"
-  depends_on "mbopenmotif"
+  depends_on "openmotif"
   depends_on "opencv"
   depends_on "qt"
   depends_on "dwcaress/mbsystem/otps"
@@ -42,7 +42,7 @@ class MbsystemBetamax < Formula
       "--with-opencv-lib=#{Formula["opencv"].opt_lib}"
     ]
 
-    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
+    ENV['CFLAGS']=""
 
     system "./configure", *args
     system "make", "check" if build.with? "check"
