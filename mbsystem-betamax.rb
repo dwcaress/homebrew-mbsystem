@@ -13,9 +13,7 @@ class MbsystemBetamax < Formula
   depends_on "fftw"
   depends_on "mbopenmotif"
   depends_on "opencv"
-  depends_on "qt"
   depends_on "dwcaress/mbsystem/otps"
-  option "without-check", "Disable build time checks (not recommended)"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-betamax share the same commands'
   conflicts_with 'dwcaress/mbsystem/mbsystem-beta', :because => 'mbsystem-beta and mbsystem-betamax share the same commands'
 
@@ -26,22 +24,22 @@ class MbsystemBetamax < Formula
       "--enable-shared",
       "--with-motif-lib=#{Formula["openmotif"].opt_lib}",
       "--with-motif-include=#{Formula["openmotif"].opt_include}",
+      "--with-opengl-include=/opt/X11/include",
+      "--with-opengl-lib=/opt/X11/lib",
+      "--with-opencv-include=#{Formula["opencv"].opt_include}/opencv4",
+      "--with-opencv-lib=#{Formula["opencv"].opt_lib}",
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
       "--with-otps-dir=/usr/local/opt/otps",
       "--enable-hardening",
       "--enable-mbtrn",
       "--enable-mbtnav",
-      "--with-opengl-include=/opt/X11/include",
-      "--with-opengl-lib=/opt/X11/lib",
-      "--enable-opencv",
-      "--with-opencv-include=#{Formula["opencv"].opt_include}/opencv4",
-      "--with-opencv-lib=#{Formula["opencv"].opt_lib}"
+      "--enable-opencv"
     ]
 
     ENV['CFLAGS']="-I/usr/X11/include -L/usr/X11/lib"
 
     system "./configure", *args
-    system "make", "check" if build.with? "check"
+    system "make", "check"
     system "make", "install"
   end
 
