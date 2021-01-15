@@ -39,7 +39,7 @@ class MbsystemBetamax < Formula
       "--enable-opencv"
     ]
 
-    ENV['CFLAGS']="-I/usr/X11/include -L/usr/X11/lib"
+    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
 
     system "./configure", *args
     system "make", "check"
