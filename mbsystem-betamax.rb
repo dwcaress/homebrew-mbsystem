@@ -4,8 +4,6 @@ class MbsystemBetamax < Formula
   url "https://github.com/dwcaress/MB-System/archive/5.7.7beta09.tar.gz"
   sha256 "93dfbd33c43f2e711f0502d7a9c87d57014925fd1587157df4b16b7aa55325bc"
   license "GPL3"
-
-  env :std
   
   depends_on "gmt"
   depends_on "proj"
