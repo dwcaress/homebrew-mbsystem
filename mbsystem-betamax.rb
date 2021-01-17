@@ -13,6 +13,8 @@ class MbsystemBetamax < Formula
   depends_on "dwcaress/mbsystem/otps"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-betamax share the same commands'
   conflicts_with 'dwcaress/mbsystem/mbsystem-beta', :because => 'mbsystem-beta and mbsystem-betamax share the same commands'
+  
+  env :std
 
   def install
     args = [
