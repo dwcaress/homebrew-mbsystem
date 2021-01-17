@@ -35,8 +35,9 @@ class MbsystemBetamax < Formula
       "--enable-opencv"
     ]
 
-    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
-
+    ENV.03
+    ENV.deparallelize
+    ENV.delete(INCLUDES)
     system "./configure", *args
     system "make", "check"
     system "make", "install"
