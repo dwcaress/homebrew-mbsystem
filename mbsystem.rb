@@ -25,16 +25,15 @@ class Mbsystem < Formula
       "--prefix=#{prefix}",
       "--disable-static",
       "--enable-shared",
-      "--with-proj-lib=#{Formula["proj"].opt_lib}",
-      "--with-proj-include=#{Formula["proj"].opt_include}",
-      "--with-fftw-lib=#{Formula["fftw"].opt_lib}",
-      "--with-fftw-include=#{Formula["fftw"].opt_include}",
-      "--with-motif-lib=#{Formula["openmotif"].opt_lib}",
-      "--with-motif-include=#{Formula["openmotif"].opt_include}",
-      "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}"
+      "--with-x11-lib=/opt/X11/lib",
+      "--with-x11-include=/opt/X11/include",
+      "--with-motif-lib=#{Formula["mbopenmotif"].opt_lib}",
+      "--with-motif-include=#{Formula["mbopenmotif"].opt_include}",
+      "--with-opengl-include=/opt/X11/include",
+      "--with-opengl-lib=/opt/X11/lib",
+      "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
+      "--enable-hardening",
     ]
-
-    ENV['CFLAGS']="-I/usr/X11/include -L/usr/X11/lib"
 
     system "./configure", *args
     system "make", "check" if build.with? "check"
