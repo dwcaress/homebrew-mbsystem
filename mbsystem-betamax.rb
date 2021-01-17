@@ -37,7 +37,7 @@ class MbsystemBetamax < Formula
 
     ENV.03
     ENV.deparallelize
-    ENV.delete(INCLUDES)
+    ENV.delete("INCLUDES")
     system "./configure", *args
     system "make", "check"
     system "make", "install"
