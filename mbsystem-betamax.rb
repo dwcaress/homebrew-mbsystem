@@ -35,9 +35,6 @@ class MbsystemBetamax < Formula
       "--enable-opencv"
     ]
 
-    ENV.03
-    ENV.deparallelize
-    ENV.delete("INCLUDES")
     system "./configure", *args
     system "make", "check"
     system "make", "install"
