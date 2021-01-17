@@ -32,11 +32,8 @@ class MbsystemBeta < Formula
       "--with-opengl-include=/opt/X11/include",
       "--with-opengl-lib=/opt/X11/lib",
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
-      "--with-otps-dir=/usr/local/opt/otps",
       "--enable-hardening",
     ]
-
-    ENV['CFLAGS']="-I/usr/X11/include -L/usr/X11/lib"
 
     system "./configure", *args
     system "make", "check" if build.with? "check"
