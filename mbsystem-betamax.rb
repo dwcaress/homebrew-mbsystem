@@ -2,7 +2,7 @@ class MbsystemBetamax < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for test distributions)"
   homepage "http://www.mbari.org/products/research-software/mb-system/"
   url "https://github.com/dwcaress/MB-System/archive/5.7.8.tar.gz"
-  sha256 "12c8e70b41c5ae7761757097ff89f97055b5cd32627e2ad05d2c97edb3b0486c"
+  sha256 "aa3f7c7f79a933d22ff7410284c3c7de9ba9416c14f271bec231b2307101abad"
   license "GPL3"
   
   depends_on "gmt"
