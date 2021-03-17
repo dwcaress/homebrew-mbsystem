@@ -7,14 +7,6 @@ class Openmotif < Formula
   license "LGPL-2.1-or-later"
   revision 1
 
-  bottle do
-    sha256 arm64_big_sur: "ae3f4bf92f1cbc78a985e8c27979a52c1a4c16696a74bb142a317f88f5c46082"
-    sha256 big_sur:       "ca698d287f8b964a34fa23cf2a8b6039fd5913d6169bbdf90bf90f6b580c8475"
-    sha256 catalina:      "07edf35230c5dca07fd5b4aa3a198d9ec706319e9b57ae62259f63d9726262f7"
-    sha256 mojave:        "b921f9634055bd7aaab722d156feca35da0742106036f23837241d53d1380648"
-    sha256 high_sierra:   "0ebe3e7a88d400291a3e0a3f46d40b500c1e0487f5f689535c8c468993e786da"
-  end
-
   depends_on "pkg-config" => :build
   depends_on "fontconfig"
   depends_on "freetype"
@@ -26,7 +18,6 @@ class Openmotif < Formula
   depends_on "libxext"
   depends_on "libxft"
   depends_on "libxmu"
-  depends_on "libxp"
   depends_on "libxt"
   depends_on "xbitmaps"
 
@@ -38,7 +29,11 @@ class Openmotif < Formula
   def install
     system "./configure", "--prefix=#{prefix}",
                           "--disable-dependency-tracking",
-                          "--disable-silent-rules"
+                          "--disable-silent-rules",
+                          "--enable-xft",
+                          "--enable-jpeg",
+                          "--enable-png",
+                          "--disable-printing"
     system "make"
     system "make", "install"
 
