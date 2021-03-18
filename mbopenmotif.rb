@@ -26,7 +26,11 @@ class Mbopenmotif < Formula
   def install
     system "./configure", "--prefix=#{prefix}",
                           "--disable-dependency-tracking",
-                          "--disable-silent-rules"
+                          "--disable-silent-rules",
+                          "--enable-xft",
+                          "--enable-jpeg",
+                          "--enable-png",
+                          "--disable-printing"
 
     ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
 
