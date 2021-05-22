@@ -1,18 +1,12 @@
 class Gmt < Formula
   desc "Tools for manipulating and plotting geographic and Cartesian data"
   homepage "https://www.generic-mapping-tools.org/"
-  url "https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-src.tar.xz"
-  mirror "https://mirrors.ustc.edu.cn/gmt/gmt-6.1.1-src.tar.xz"
-  sha256 "d476cba999340648146ef53ab4a3f64858cbd2f5511cdec9f7f06f3fb7896625"
+  url "https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.2.0rc1-src.tar.gz"
+  mirror "https://mirrors.ustc.edu.cn/gmt/gmt-6.2.0rc1-src.tar.gz"
+  sha256 "6c88615c5a5dcbaca5927ad1c172f65ab720dece7009b311c80e1d75585a0cbd"
   license "LGPL-3.0-or-later"
   revision 6
   head "https://github.com/GenericMappingTools/gmt.git"
-
-  bottle do
-    sha256 big_sur:  "c674e173823291de07b175b5ba711f8eddfdf206f5493d7ed7f3957c708c4987"
-    sha256 catalina: "1e13d3e9302d8a721482c9cb129230f49ebec3a7bcb58992b1fe83cf689de396"
-    sha256 mojave:   "cab74831f1b9511d15cee15e7198c7b0b249adc7a217737f178341fcd8006e36"
-  end
 
   depends_on "cmake" => :build
   depends_on "fftw"
