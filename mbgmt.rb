@@ -1,4 +1,4 @@
-class Gmt < Formula
+class Mbgmt < Formula
   desc "Tools for manipulating and plotting geographic and Cartesian data"
   homepage "https://www.generic-mapping-tools.org/"
   url "https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.2.0rc1-src.tar.gz"
