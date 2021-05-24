@@ -24,13 +24,17 @@ class Mbopenmotif < Formula
     because: "the openmotif formula in homebrew-core depends on the brew version of X11 (without GLX) rather than XQuartz (with GLX)"
 
   def install
-    system "./configure --prefix=#{prefix}",
-                          "--disable-dependency-tracking",
-                          "--disable-silent-rules",
-                          "--enable-xft",
-                          "--enable-jpeg",
-                          "--enable-png",
-                          "--disable-printing"
+    args = [
+      "--prefix=#{prefix}",
+      "--disable-dependency-tracking",
+      "--disable-silent-rules",
+      "--enable-xft",
+      "--enable-jpeg",
+      "--enable-png",
+      "--disable-printing"
+    ]
+
+    system "./configure", *args
 
     ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
 
