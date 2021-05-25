@@ -14,6 +14,8 @@ class Mbopenmotif < Formula
   depends_on "freetype"
   depends_on "jpeg"
   depends_on "libpng"
+  
+  uses_from_macos "flex" => :build
 
   conflicts_with "lesstif",
     because: "both Lesstif and Openmotif are complete replacements for each other"
@@ -26,9 +28,6 @@ class Mbopenmotif < Formula
       "--prefix=#{prefix}",
       "--disable-dependency-tracking",
       "--disable-silent-rules",
-      "--enable-xft",
-      "--enable-jpeg",
-      "--enable-png",
       "--disable-printing"
     ]
 
