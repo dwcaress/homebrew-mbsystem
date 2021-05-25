@@ -5,8 +5,6 @@ class Mbopenmotif < Formula
   sha256 "859b723666eeac7df018209d66045c9853b50b4218cecadb794e2359619ebce7"
   license "LGPL-2.1"
   
-  env :std
-  
   livecheck do
     url :stable
   end
@@ -34,7 +32,7 @@ class Mbopenmotif < Formula
       "--disable-printing"
     ]
 
-    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
+    ENV['CFLAGS']="$CFLAGS -I/opt/X11/include -L/opt/X11/lib"
 
     system "./configure", *args
 
