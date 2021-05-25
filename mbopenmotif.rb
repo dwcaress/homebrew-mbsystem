@@ -32,7 +32,7 @@ class Mbopenmotif < Formula
       "--disable-printing"
     ]
 
-    ENV['CFLAGS']="$CFLAGS -I/opt/X11/include -L/opt/X11/lib"
+    ENV['CFLAGS']="-I/opt/X11/include -L/opt/X11/lib"
 
     system "./configure", *args
 
