@@ -14,6 +14,7 @@ class Mbopenmotif < Formula
   depends_on "freetype"
   depends_on "jpeg"
   depends_on "libpng"
+  depends_on "xquartz"
   
   uses_from_macos "flex" => :build
 
