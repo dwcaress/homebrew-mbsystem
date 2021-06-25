@@ -14,7 +14,7 @@ class MbsystemBeta < Formula
   depends_on "ghostscript"
   depends_on "ffmpeg"
   depends_on "graphicsmagick"
-  depends_on "mbopenmotif"
+  depends_on "openmotif"
   depends_on "dwcaress/mbsystem/otps"
   option "without-check", "Disable build time checks (not recommended)"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-beta share the same commands'
