@@ -35,9 +35,9 @@ class Mbopenmotif < Formula
 
     system "./configure", *args
 
-#    system "make", "CFLAGS=-I/opt/X11/include", "LDFLAGS=-L/opt/X11/lib"
-    system "make"
-    system "make", "install"
+    system "make", "CFLAGS=-I/opt/X11/include", "LDFLAGS=-L/opt/X11/lib", "install"
+    #system "make"
+    #system "make", "install"
 
     # Avoid conflict with Perl
     mv man3/"Core.3", man3/"openmotif-Core.3"
