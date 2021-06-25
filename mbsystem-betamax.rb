@@ -11,7 +11,7 @@ class MbsystemBetamax < Formula
   depends_on "ghostscript"
   depends_on "ffmpeg"
   depends_on "graphicsmagick"
-  depends_on "mbopenmotif"
+  depends_on "openmotif"
   depends_on "opencv"
   depends_on "dwcaress/mbsystem/otps"
   conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-betamax share the same commands'
