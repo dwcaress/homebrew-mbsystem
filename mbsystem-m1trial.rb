@@ -5,7 +5,7 @@ class MbsystemM1trial < Formula
   sha256 "14f6cec26c45b68c6ad3d2ad67ce5a83741d677be678c26c41176f29aa284623"
   license "GPL3"
   
-  depends_on "mbgmt"
+  depends_on "gmt"
   depends_on "proj"
   depends_on "gdal"
   depends_on "fftw"
