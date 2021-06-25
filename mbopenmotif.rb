@@ -35,7 +35,7 @@ class Mbopenmotif < Formula
 
     system "./configure", *args
 
-    system "make", "CFLAGS=-I/opt/X11/include", "LDFLAGS=-L/opt/X11/lib", "install"
+    system "make", "CFLAGS+=-I/opt/X11/include", "LDFLAGS+=-L/opt/X11/lib", "install"
     #system "make"
     #system "make", "install"
 
