@@ -32,7 +32,7 @@ class MbsystemM1trial < Formula
       "--with-motif-include=#{Formula["openmotif"].opt_include}",
       "--with-opengl-include=/opt/X11/include",
       "--with-opengl-lib=/opt/X11/lib",
-      "--with-opencv-include=#{Formula["opencv"].opt_include}/opencv4",
+      "--with-opencv-include=#{Formula["opencv"].opt_include}/opencv4xxx",
       "--with-opencv-lib=#{Formula["opencv"].opt_lib}",
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
       "--enable-hardening",
