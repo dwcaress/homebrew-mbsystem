@@ -7,6 +7,7 @@ class MbsystemBetamax < Formula
   
   depends_on "gmt"
   depends_on "proj"
+  depends_on "gdal"
   depends_on "fftw"
   depends_on "ghostscript"
   depends_on "ffmpeg"
