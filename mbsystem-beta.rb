@@ -1,7 +1,7 @@
 class MbsystemBeta < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for test distributions)"
   homepage "http://www.mbari.org/products/research-software/mb-system/"
-  url "https://github.com/dwcaress/MB-System/archive/5.7.9beta11.tar.gz"
+  url "https://github.com/dwcaress/MB-System/archive/5.7.9beta12.tar.gz"
   sha256 "b0b23883306fe2262dc29ae30de4be2941da4e82984490646f4279dc12d20732"
 
   env :std
