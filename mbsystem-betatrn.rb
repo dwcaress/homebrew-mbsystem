@@ -35,8 +35,9 @@ class MbsystemBetatrn < Formula
       "--with-opencv-lib=#{Formula["opencv"].opt_lib}",
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
       "--enable-hardening",
-
-      "--enable-opencv"
+      "--enable-opencv",
+      "--enable-mbtrn",
+      "--enable-mbtnav"
     ]
 
     system "./configure", *args
