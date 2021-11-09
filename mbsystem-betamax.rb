@@ -35,8 +35,6 @@ class MbsystemBetamax < Formula
       "--with-opencv-lib=#{Formula["opencv"].opt_lib}",
       "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
       "--enable-hardening",
-      "--enable-mbtrn",
-      "--enable-mbtnav",
       "--enable-opencv"
     ]
 
