@@ -3,8 +3,6 @@ class Mbsystem < Formula
   homepage "https://www.mbari.org/technology/mb-system/"
   url "https://github.com/dwcaress/MB-System/archive/refs/tags/MB-System-5.8.3beta12.tar.gz"
   sha256 "aa3f7c7f79a933d22ff7410284c3c7de9ba9416c14f271bec231b2307101abad"
-
-  sha256 "da102e4ffe0b4eb535717171c3ca315295c5dd03ec584b06aa2fd748fada22a8"
   license "GPL-3.0-or-later"
   head "https://github.com/dwcaress/MB-System.git", branch: "master"
 
