@@ -70,8 +70,6 @@ class Mbsystem < Formula
       system "gmt" "gmtset GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.so"
       system "gmt" "gmtset DIR_DCW #{HOMEBREW_PREFIX}/share/gmt/dcw"
       system "gmt" "gmtset DIR_GSHHG #{HOMEBREW_PREFIX}/share/gmt/coast"
-
-
       system "cmake", "..", *args, *std_cmake_args
       system "make"
       system "make", "install"
@@ -81,13 +79,9 @@ class Mbsystem < Formula
 
   def caveats
     <<~EOS
-      MB-System has been installed with XQuartz for X11 support.
-
-      The graphical tools (MBedit, MBnavedit, MBvelocitytool, MBgrdviz,
-      MBeditviz) require X11, which has been installed via XQuartz.
-
-      You may need to log out and back in for XQuartz to be fully configured.
-
+      The MB-System graphical tools (MBedit, MBnavedit, MBvelocitytool, MBgrdviz,
+      MBeditviz) require X11, which must have been installed via XQuartz.
+      
       For more information and documentation, visit:
         https://www.mbari.org/technology/mb-system/
 
@@ -101,62 +95,5 @@ class Mbsystem < Formula
     system "#{bin}/mbformat", "-V"
     system "#{bin}/mbinfo", "--version"
     system "#{bin}/mbsystem", "-V"
-  end
-end
-
-
-
-
-  env :std
-  
-  depends_on "gmt"
-  depends_on "gdal"
-  depends_on "netcdf"
-  depends_on "proj"
-  depends_on "fftw"
-  depends_on "ghostscript"
-  depends_on "ffmpeg"
-  depends_on "graphicsmagick"
-  depends_on "openmotif"
-  depends_on "dwcaress/mbsystem/otps"
-  option "withgvout-check", "Disable build time checks (not recommended)"
-  conflicts_with 'dwcaress/mbsystem/mbsystem-beta', :because => 'mbsystem and mbsystem-beta share the same commands'
-  conflicts_with 'dwcaress/mbsystem/mbsystem-betamax', :because => 'mbsystem and mbsystem-betamax share the same commands'
-
-  def install
-    args = [
-      "--prefix=#{prefix}",
-      "--disable-static",
-      "--enable-shared",
-      "--with-x11-lib=/opt/X11/lib",
-      "--with-x11-include=/opt/X11/include",
-      "--with-motif-lib=#{Formula["openmotif"].opt_lib}",
-      "--with-motif-include=#{Formula["openmotif"].opt_include}",
-      "--with-opengl-include=/opt/X11/include",
-      "--with-opengl-lib=/opt/X11/lib",
-      "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
-      "--enable-hardening",
-    ]
-
-    system "./configure", *args
-    system "make", "check" if build.with? "check"
-    system "make", "install"
-  end
-
-  def caveats
-    <<~EOS
-
-      The GMT_CUSTOM_LIBS needs to be set for all users
-      on this computer that want to use mbsystem. Run the
-      following command within the home directory:
-          gmtset GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.so
-
-      Additionally, if not already done within the gmt
-      installation, the directories for DCW and GSHHG (borders,
-      coast lines, rivers, etc.) need to be set:
-          gmtset DIR_DCW #{HOMEBREW_PREFIX}/share/gmt/dcw
-          gmtset DIR_GSHHG #{HOMEBREW_PREFIX}/share/gmt/coast
-
-    EOS
   end
 end
