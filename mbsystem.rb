@@ -65,7 +65,7 @@ class Mbsystem < Formula
       args << "-DXt_INCLUDE_DIR=#{Formula["libxt"].opt_include}"
       args << "-DXt_LIBRARIES=#{Formula["libxt"].opt_lib}/libXt.dylib"
 
-      system "gmt" "gmtset GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.so"
+      system "gmt" "gmtset GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.dylib"
       system "gmt" "gmtset DIR_DCW #{HOMEBREW_PREFIX}/share/gmt/dcw"
       system "gmt" "gmtset DIR_GSHHG #{HOMEBREW_PREFIX}/share/gmt/coast"
       system "cmake", "..", *args, *std_cmake_args
