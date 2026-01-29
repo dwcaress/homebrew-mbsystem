@@ -69,7 +69,7 @@ class Mbsystem < Formula
       system "make"
       system "make", "install"
       system "make", "test"
-      system "gmt", "set GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.dylib"
+      # system "gmt", "set GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.dylib"
     end
   end
 
