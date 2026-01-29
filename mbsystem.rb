@@ -28,18 +28,21 @@ class Mbsystem < Formula
         -DCMAKE_BUILD_TYPE=Release
       ]
 
+      # Enable Qt/VTK tools
+      args << "-DbuildQt=ON"
+
       # Configure Qt6 paths
-      args << "-DQt6_DIR=#{Formula["qt@6"].opt_lib}/cmake/Qt6"
+      # args << "-DQt6_DIR=#{Formula["qt@6"].opt_lib}/cmake/Qt6"
 
       # Configure VTK paths
-      args << "-DVTK_DIR=#{Formula["vtk"].opt_lib}/cmake/vtk"
+      # args << "-DVTK_DIR=#{Formula["vtk"].opt_lib}/cmake/vtk"
 
       # Enable VTK modules with Qt GUI support
-      args << "-DVTK_QT_VERSION=6"
-      args << "-DVTK_GROUP_ENABLE_Qt=YES"
-      args << "-DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES"
-      args << "-DVTK_MODULE_ENABLE_VTK_ViewsQt=YES"
-      args << "-DVTK_MODULE_ENABLE_VTK_GUISupportQtQuick=YES"
+      # args << "-DVTK_QT_VERSION=6"
+      # args << "-DVTK_GROUP_ENABLE_Qt=YES"
+      # args << "-DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES"
+      # args << "-DVTK_MODULE_ENABLE_VTK_ViewsQt=YES"
+      # args << "-DVTK_MODULE_ENABLE_VTK_GUISupportQtQuick=YES"
 
       # Configure GMT paths
       # args << "-DGMT_DIR=#{Formula["gmt"].opt_prefix}"
