@@ -1,4 +1,4 @@
-a12class Mbsystem < Formula
+class Mbsystem < Formula
   desc "MB-System seafloor mapping data processing software"
   homepage "https://www.mbari.org/technology/mb-system/"
   url "https://github.com/dwcaress/MB-System/archive/refs/tags/MB-System-5.8.3beta12.tar.gz"
