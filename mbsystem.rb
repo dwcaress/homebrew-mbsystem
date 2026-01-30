@@ -54,6 +54,11 @@ class Mbsystem < Formula
     <<~EOS
       The MB-System graphical tools (MBedit, MBnavedit, MBvelocitytool, MBgrdviz,
       MBeditviz) require X11, which must have been installed via XQuartz.
+
+      To use the GMT modules included in MB-System (mbswath, mbcontour, mbgrdtiff)
+      one must set the location of the MB-System library including those modules 
+      in a gmt.conf file in each user's home directory. Execute:
+        pushd ~ ; gmt set GMT_CUSTOM_LIBS "/opt/homebrew/lib/mbsystem.dylib" ; popd
       
       For more information and documentation, visit:
         https://www.mbari.org/technology/mb-system/
