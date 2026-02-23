@@ -38,10 +38,6 @@ class MbSystem < Formula
         -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON
       ]
 
-      # NOTE: XQuartz GLX/OpenGL is broken on modern macOS
-      # X11/Motif apps with OpenGL (mbgrdviz, mbeditviz) will not work
-      # Users should use Qt versions (qt-mbgrdviz, etc.) instead
-
       # Configure Qt6 paths
       ENV["Qt6_DIR"] = "#{Formula["qt@6"].opt_lib}/cmake/Qt6"
 
@@ -71,24 +67,21 @@ class MbSystem < Formula
     # These are typically in the source tree, not the build tree
     ohai "Install python test scripts now"
     (libexec/"bin").install Dir["test/utilities/*.py"]
-    ### cd buildpath/"test/utilities" do
-    ###  bin.install Dir["*.py"]
-    ### end
   end
 
   def caveats
     <<~EOS
       MB-System has been installed.
 
-      IMPORTANT: On modern macOS, XQuartz's OpenGL/GLX support is broken.
-      X11/Motif apps with OpenGL (mbgrdviz, mbeditviz) will NOT work.
+      IMPORTANT: On modern macOS, XQuartz's OpenGL/GLX support is fragile, and
+      X11/Motif apps based on OpenGL (mbgrdviz, mbeditviz) may be problematic.
 
-      ** Use the Qt versions instead: **
+      ** Transition to Qt/VTK versions instead: **
         - qt-mbgrdviz (instead of mbgrdviz)
         - qt-mbnavedit (instead of mbnavedit)
         - qt-mbeditviz (instead of mbeditviz)
 
-      Qt versions use native macOS graphics and work reliably.
+      Qt/VTK versions use native macOS graphics and work reliably.
 
       For non-OpenGL X11 apps (MBedit, etc.), you need XQuartz:
 
