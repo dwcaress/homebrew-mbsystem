@@ -1,4 +1,4 @@
-class MbSystemNewgui < Formula
+class MbsystemNewgui < Formula
   desc "Processing and display of swath sonar bathymetry and backscatter imagery data"
   homepage "https://www.mbari.org/technology/mb-system/"
   url "https://github.com/dwcaress/MB-System.git",
