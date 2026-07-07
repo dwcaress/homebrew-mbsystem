@@ -1,56 +1,83 @@
 class MbsystemBeta < Formula
-  desc "MB-System seafloor mapping software (Homebrew formula for test distributions)"
-  homepage "http://www.mbari.org/products/research-software/mb-system/"
-  url "https://github.com/dwcaress/MB-System/archive/5.83beta14.tar.gz"
+  desc "MB-System seafloor mapping software (Homebrew formula for beta test distributions)"
+  homepage "https://www.mbari.org/technology/mb-system/"
+  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta14.tar.gz"
   sha256 "d915d817041818c231c4992dc290a5adb9fd6d6f57dce64241e9b03f9af9964b"
+  license "GPL-3.0-or-later"
+  head "https://github.com/dwcaress/MB-System.git", branch: "master"
 
-  env :std
-  
-  depends_on "gmt"
+  depends_on "cmake" => :build
+  depends_on "pkg-config" => :build
+
+  depends_on "fftw"
   depends_on "gdal"
   depends_on "netcdf"
+  depends_on "gmt"
   depends_on "proj"
-  depends_on "fftw"
-  depends_on "ghostscript"
-  depends_on "ffmpeg"
-  depends_on "graphicsmagick"
+  depends_on "libx11"
+  depends_on "libxt"
   depends_on "openmotif"
-  depends_on "dwcaress/mbsystem/otps"
-  option "without-check", "Disable build time checks (not recommended)"
-  conflicts_with 'dwcaress/mbsystem/mbsystem', :because => 'mbsystem and mbsystem-beta share the same commands'
-  conflicts_with 'dwcaress/mbsystem/mbsystem-betamax', :because => 'mbsystem-betamax and mbsystem-beta share the same commands'
+  depends_on "mesa"
+  depends_on "mesa-glu"
+  depends_on "opencv"
+  depends_on "qt@6"
+  depends_on "vtk"
 
   def install
-    args = [
-      "--prefix=#{prefix}",
-      "--disable-static",
-      "--enable-shared",
-      "--with-x11-lib=/opt/X11/lib",
-      "--with-x11-include=/opt/X11/include",
-      "--with-motif-lib=#{Formula["openmotif"].opt_lib}",
-      "--with-motif-include=#{Formula["openmotif"].opt_include}",
-      "--with-opengl-include=/opt/X11/include",
-      "--with-opengl-lib=/opt/X11/lib",
-      "--with-otps-dir=#{Formula["dwcaress/mbsystem/otps"].prefix}",
-      "--enable-hardening",
-    ]
+    # Set up build directory
+    mkdir "build" do
+      args = %W[
+        -DCMAKE_INSTALL_PREFIX=#{prefix}
+        -DCMAKE_BUILD_TYPE=Release
+      ]
 
-    system "./configure", *args
-    system "make", "check" if build.with? "check"
-    system "make", "install"
+      # Enable Qt/VTK tools
+      # args << "-DbuildQt=ON"
+
+      # Configure Qt6 paths
+      # args << "-DQt6_DIR=#{Formula["qt@6"].opt_lib}/cmake/Qt6"
+
+      # Configure VTK paths
+      # args << "-DVTK_DIR=#{Formula["vtk"].opt_lib}/cmake/vtk"
+
+      # Enable VTK modules with Qt GUI support
+      # args << "-DVTK_QT_VERSION=6"
+      # args << "-DVTK_GROUP_ENABLE_Qt=YES"
+      # args << "-DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES"
+      # args << "-DVTK_MODULE_ENABLE_VTK_ViewsQt=YES"
+      # args << "-DVTK_MODULE_ENABLE_VTK_GUISupportQtQuick=YES"
+
+      system "cmake", "..", *args, *std_cmake_args
+      system "make"
+      system "make", "install"
+    end
   end
 
   def caveats
     <<~EOS
-      The GMT_CUSTOM_LIBS needs to be set for all users
-      on this computer that want to use mbsystem. Run the
-      following command within the home directory:
-          gmt gmtset GMT_CUSTOM_LIBS #{HOMEBREW_PREFIX}/lib/mbsystem.so
-      Additionally, if not already done within the gmt
-      installation, the directories for DCW and GSHHG (borders,
-      coast lines, rivers, etc.) need to be set:
-          gmt gmtset DIR_DCW #{HOMEBREW_PREFIX}/share/gmt/dcw
-          gmt gmtset DIR_GSHHG #{HOMEBREW_PREFIX}/share/gmt/coast
+      The MB-System graphical tools (MBedit, MBnavedit, MBvelocitytool, MBgrdviz,
+      MBeditviz) require X11, which must have been installed via XQuartz.
+
+      To use the GMT modules included in MB-System (mbswath, mbcontour, mbgrdtiff)
+      one must set the location of the MB-System library including those modules 
+      in a gmt.conf file in each user's home directory. Execute:
+        pushd ~ ; gmt set GMT_CUSTOM_LIBS "/opt/homebrew/lib/mbsystem.dylib" ; popd
+      
+      For more information and documentation, visit:
+        https://www.mbari.org/technology/mb-system/
+
+      To get help or report issues, use the MB-System discussion lists:
+        http://listserver.mbari.org/sympa/info/mbsystem
     EOS
+  end
+
+  test do
+    # Test that the main utilities are installed and can display version info
+    system "#{bin}/mbformat", "-V"
+    system "#{bin}/mbinfo", "--version"
+    system "#{bin}/mbsystem", "-V"
+  end
+end
+
   end
 end
