@@ -78,6 +78,3 @@ class MbsystemBeta < Formula
     system "#{bin}/mbsystem", "-V"
   end
 end
-
-  end
-end
