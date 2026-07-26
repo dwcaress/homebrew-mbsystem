@@ -1,8 +1,8 @@
 class Mbsystem < Formula
   desc "MB-System seafloor mapping data processing software"
   homepage "https://www.mbari.org/technology/mb-system/"
-  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta15.tar.gz"
-  sha256 "8517cbf63bffe76cc882a45285187f40c60e268d01641e01bdbb6678790c5e2f"
+  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta16.tar.gz"
+  sha256 "fabd04ce4646d8d4b74da8a0894c4053291fe2b3b1c33dc02c38cf6546881937"
   license "GPL-3.0-or-later"
   head "https://github.com/dwcaress/MB-System.git", branch: "master"
 
