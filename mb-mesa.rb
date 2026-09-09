@@ -31,7 +31,11 @@ class MbMesa < Formula
   depends_on "libxrender" => :build
   depends_on "libxshmfence" => :build
   depends_on "libyaml" => :build
+  
   depends_on "llvm@22" => :build # FIXME: https://github.com/rust-lang/rust-bindgen/issues/3397
+  # Force Homebrew to inject LLVM's private pkg-config directory into the build path
+  env :user_paths
+  
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => [:build, :test]
@@ -188,7 +192,12 @@ class MbMesa < Formula
       ]
     end
 
-    system "meson", "setup", "build", *args, *std_meson_args
+    # Inside your def install block:
+    llvm = Formula["llvm"]
+    ENV.prepend_path "PKG_CONFIG_PATH", llvm.opt_lib/"pkgconfig"
+
+    # Then proceed with your existing meson setup command:
+    system "meson", "setup", "build", *args, *std_meson_args, "-Dgallium-rusticl=true", "-Dllvm=enabled"
     system "meson", "compile", "-C", "build", "--verbose"
     system "meson", "install", "-C", "build"
 
