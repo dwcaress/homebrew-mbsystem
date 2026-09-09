@@ -7,6 +7,12 @@ class MbMesaGlu < Formula
   compatibility_version 1
   head "https://gitlab.freedesktop.org/mesa/glu.git", branch: "master"
 
+  # Installs the same files as the standard mesa-glu formula (include/GL/glu.h,
+  # lib/libGLU.dylib) - keep it out of HOMEBREW_PREFIX so it can't collide
+  # with mesa-glu's symlinks. MB-System's own build should reference this
+  # keg directly, same as it does for mb-mesa.
+  keg_only "it installs files that conflict with the standard mesa-glu formula"
+
   bottle do
     sha256 cellar: :any,                 arm64_tahoe:    "04be327648775a1c07ed70dd1fbe931983e013381f3459c10c12132fee8c7283"
     sha256 cellar: :any,                 arm64_sequoia:  "20ebc8dee6088f6f72e85c115535d7ae2d91af99b06dfa347bb9fb159d1e593c"
@@ -23,7 +29,11 @@ class MbMesaGlu < Formula
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
-  depends_on "mesa"
+  # Link against the pinned mb-mesa (26.1.4) keg instead of the standard mesa
+  # formula, so libGLU shares the same libGL image as MB-System's own mb-mesa
+  # build - otherwise GLU calls silently no-op against a different, unbound
+  # GL context (see mbview's blank 3D-perspective-view bug).
+  depends_on "dwcaress/mbsystem/mb-mesa"
 
   def install
     system "meson", "setup", "build", "-Dgl_provider=gl", *std_meson_args
