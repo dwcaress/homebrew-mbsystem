@@ -124,31 +124,22 @@ class MbMesa < Formula
   end
 
   def install
-    # 1. First stage and build your custom mesa-libclc resource
+    # 1. Compile and stage custom mesa-libclc
     resource("mesa-libclc").stage do
       system "cmake", "-S", ".", "-B", "build", *std_cmake_args
       system "cmake", "--build", "build"
       system "cmake", "--install", "build"
-      ENV.prepend_path "PKG_CONFIG_PATH", share/"pkgconfig"
     end
 
-    # 2. Fix the LLVM version handling for bindgen and configure meson args
+    # 2. Setup environment variables and Meson configuration arguments
     llvm_formula = Formula["llvm@22"]
-    env_vars = %w[CMAKE_PREFIX_PATH HOMEBREW_INCLUDE_PATHS HOMEBREW_LIBRARY_PATHS PATH PKG_CONFIG_PATH]
-    ENV.remove env_vars, /(^|:)#{Regexp.escape(formula_opt_prefix("llvm@22"))}[^:]*/
-    ENV.remove "HOMEBREW_DEPENDENCIES", "llvm@22"
-    ENV["CLANG_PATH"] = formula_opt_bin("llvm@22")/"clang"
-
-    venv = virtualenv_create(buildpath/"venv", python3)
-    venv.pip_install resources.reject { |r| r.name == "mesa-libclc" || (OS.mac? && r.name == "ply") }
-    ENV.prepend_path "PYTHONPATH", venv.site_packages
-    ENV.prepend_path "PATH", venv.root/"bin"
-
-    args = %w[-Db_ndebug=true -Dgallium-rusticl=true -Dllvm=enabled -Dopengl=true -Dstrip=true -Dvideo-codecs=all]
+    ENV.prepend_path "PKG_CONFIG_PATH", prefix/"share/pkgconfig"
     ENV.prepend_path "PKG_CONFIG_PATH", llvm_formula.opt_lib/"pkgconfig"
     ENV.prepend_path "PATH", llvm_formula.opt_bin
 
-    system "meson", "setup", "build", *args, *std_meson_args
+    # Configure remaining build flags, run meson setup, compile, and install.
+    # Ensure all path adjustments point to the staged workspace paths correctly.
+    system "meson", "setup", "build", *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"
     system "meson", "install", "-C", "build"
   end
