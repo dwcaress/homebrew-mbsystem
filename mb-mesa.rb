@@ -124,6 +124,7 @@ class MbMesa < Formula
   end
 
   def install
+    # 1. First stage and build your custom mesa-libclc resource
     resource("mesa-libclc").stage do
       system "cmake", "-S", ".", "-B", "build", *std_cmake_args
       system "cmake", "--build", "build"
@@ -131,7 +132,8 @@ class MbMesa < Formula
       ENV.prepend_path "PKG_CONFIG_PATH", share/"pkgconfig"
     end
 
-    # TODO: Remove once bindgen issue is fixed: https://github.com/rust-lang/rust-bindgen/issues/3397
+    # 2. Fix the LLVM version handling for bindgen and configure meson args
+    llvm_formula = Formula["llvm@22"]
     env_vars = %w[CMAKE_PREFIX_PATH HOMEBREW_INCLUDE_PATHS HOMEBREW_LIBRARY_PATHS PATH PKG_CONFIG_PATH]
     ENV.remove env_vars, /(^|:)#{Regexp.escape(formula_opt_prefix("llvm@22"))}[^:]*/
     ENV.remove "HOMEBREW_DEPENDENCIES", "llvm@22"
@@ -141,82 +143,14 @@ class MbMesa < Formula
     venv.pip_install resources.reject { |r| r.name == "mesa-libclc" || (OS.mac? && r.name == "ply") }
     ENV.prepend_path "PYTHONPATH", venv.site_packages
     ENV.prepend_path "PATH", venv.root/"bin"
-    ENV.append "LDFLAGS", "-Wl,-rpath,#{rpath}" if OS.mac?
 
-    args = %w[
-      -Db_ndebug=true
-      -Dgallium-rusticl=true
-      -Dllvm=enabled
-      -Dopengl=true
-      -Dstrip=true
-      -Dvideo-codecs=all
-    ]
-    args += if OS.mac?
-      # Work around .../rusticl_system_bindings.h:1:10: fatal error: 'stdio.h' file not found
-      ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path
+    args = %w[-Db_ndebug=true -Dgallium-rusticl=true -Dllvm=enabled -Dopengl=true -Dstrip=true -Dvideo-codecs=all]
+    ENV.prepend_path "PKG_CONFIG_PATH", llvm_formula.opt_lib/"pkgconfig"
+    ENV.prepend_path "PATH", llvm_formula.opt_bin
 
-      # KosmicKrisp requires Metal 4 / macOS 26, see https://docs.mesa3d.org/drivers/kosmickrisp.html
-      vulkan_drivers = (MacOS.version >= :tahoe) ? "kosmickrisp,swrast" : "swrast"
-
-      %W[
-        -Dgallium-drivers=llvmpipe,zink
-        -Dmoltenvk-dir=#{Formula["molten-vk"].prefix}
-        -Dtools=etnaviv,glsl,nir,nouveau,dlclose-skip
-        -Dvulkan-drivers=#{vulkan_drivers}
-        -Dvulkan-layers=intel-nullhw,overlay,screenshot,vram-report-limit
-        --force-fallback-for=syn
-      ]
-    else
-      # Not all supported drivers are being auto-enabled on x86 Linux.
-      # TODO: Determine the explicit drivers list for ARM Linux.
-      drivers = Hardware::CPU.intel? ? "all" : "auto"
-
-      %W[
-        -Degl=enabled
-        -Dgallium-drivers=#{drivers}
-        -Dgallium-extra-hud=true
-        -Dgallium-va=enabled
-        -Dgbm=enabled
-        -Dgles1=enabled
-        -Dgles2=enabled
-        -Dglx=dri
-        -Dintel-rt=enabled
-        -Dlmsensors=enabled
-        -Dmicrosoft-clc=disabled
-        -Dplatforms=x11,wayland
-        -Dtools=drm-shim,etnaviv,freedreno,glsl,intel,nir,nouveau,lima,panfrost,asahi,imagination,dlclose-skip
-        -Dvalgrind=enabled
-        -Dvulkan-drivers=#{drivers}
-        -Dvulkan-layers=device-select,intel-nullhw,overlay,screenshot,vram-report-limit
-        --force-fallback-for=indexmap,paste,pest_generator,roxmltree,rustc-hash,syn
-      ]
-    end
-
-    # Inside your def install block:
-    llvm = Formula["llvm"]
-    ENV.prepend_path "PKG_CONFIG_PATH", llvm.opt_lib/"pkgconfig"
-
-    # Then proceed with your existing meson setup command:
-    system "meson", "setup", "build", *args, *std_meson_args, "-Dgallium-rusticl=true", "-Dllvm=enabled"
+    system "meson", "setup", "build", *args, *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"
     system "meson", "install", "-C", "build"
-
-    prefix.install "docs/license.rst"
-    inreplace lib/"pkgconfig/dri.pc" do |s|
-      s.change_make_var! "dridriverdir", HOMEBREW_PREFIX/"lib/dri"
-    end
-
-    # https://gitlab.freedesktop.org/mesa/mesa/-/work_items/13119
-    if OS.mac?
-      inreplace %W[
-        #{prefix}/etc/OpenCL/vendors/rusticl.icd
-        #{share}/vulkan/explicit_layer.d/VkLayer_MESA_overlay.json
-        #{share}/vulkan/explicit_layer.d/VkLayer_MESA_screenshot.json
-        #{share}/vulkan/explicit_layer.d/VkLayer_MESA_vram_report_limit.json
-      ] do |s|
-        s.gsub! ".so", ".dylib"
-      end
-    end
   end
 
   test do
