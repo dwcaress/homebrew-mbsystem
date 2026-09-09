@@ -33,9 +33,6 @@ class MbMesa < Formula
   depends_on "libyaml" => :build
 
   depends_on "llvm@22" => :build # FIXME: https://github.com/rust-lang/rust-bindgen/issues/3397
-  # Force Homebrew to inject LLVM's private pkg-config directory into the build path
-  env :user_paths
-
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => [:build, :test]
@@ -123,14 +120,13 @@ class MbMesa < Formula
     end
   end
 
-  def python3 = "python3.14"
-
   def install
     # 1. Compile and stage custom mesa-libclc
     resource("mesa-libclc").stage do
       system "cmake", "-S", ".", "-B", "build", *std_cmake_args
       system "cmake", "--build", "build"
       system "cmake", "--install", "build"
+      ENV.prepend_path "PKG_CONFIG_PATH", share/"pkgconfig"
     end
 
     # Mesa 26.1.4's meson.build only probes for a pkg-config module named
@@ -142,11 +138,16 @@ class MbMesa < Formula
     pkgconfig_dir = prefix/"share/pkgconfig"
     FileUtils.cp pkgconfig_dir/"mesa-libclc.pc", pkgconfig_dir/"libclc.pc"
 
-    # 2. Setup environment variables
-    llvm_formula = Formula["llvm@22"]
-    ENV.prepend_path "PKG_CONFIG_PATH", prefix/"share/pkgconfig"
-    ENV.prepend_path "PKG_CONFIG_PATH", llvm_formula.opt_lib/"pkgconfig"
-    ENV.prepend_path "PATH", llvm_formula.opt_bin
+    # TODO: Remove once bindgen issue is fixed: https://github.com/rust-lang/rust-bindgen/issues/3397
+    # Keep llvm@22 out of the general build environment - it's only here for
+    # bindgen. If it leaks into PATH/PKG_CONFIG_PATH/CMAKE_PREFIX_PATH, Meson
+    # picks llvm@22 (22.1) as dep_llvm instead of the regular "llvm" (23.x),
+    # which then requires an LLVMSPIRVLib matching 22.1 - but the "llvm"
+    # dependency and "spirv-llvm-translator" are meant to be used together.
+    env_vars = %w[CMAKE_PREFIX_PATH HOMEBREW_INCLUDE_PATHS HOMEBREW_LIBRARY_PATHS PATH PKG_CONFIG_PATH]
+    ENV.remove env_vars, /(^|:)#{Regexp.escape(formula_opt_prefix("llvm@22"))}[^:]*/
+    ENV.remove "HOMEBREW_DEPENDENCIES", "llvm@22"
+    ENV["CLANG_PATH"] = formula_opt_bin("llvm@22")/"clang"
 
     # Work around .../rusticl_system_bindings.h:1:10: fatal error: 'stdio.h' file not found
     ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path
@@ -162,8 +163,9 @@ class MbMesa < Formula
     venv.pip_install resources.reject { |r| r.name == "mesa-libclc" || (OS.mac? && r.name == "ply") }
     ENV.prepend_path "PYTHONPATH", venv.site_packages
     ENV.prepend_path "PATH", venv.root/"bin"
+    ENV.append "LDFLAGS", "-Wl,-rpath,#{rpath}" if OS.mac?
 
-    # 3. Configure remaining build flags, run meson setup, compile, and install.
+    # 2. Configure remaining build flags, run meson setup, compile, and install.
     args = %W[
       -Db_ndebug=true
       -Dgallium-rusticl=true
