@@ -131,6 +131,13 @@ class MbMesa < Formula
       system "cmake", "--install", "build"
     end
 
+    # Mesa 26.1.4's meson.build only probes for a pkg-config module named
+    # "libclc" (later Mesa releases probe "mesa-libclc" first and fall back
+    # to "libclc"). mesa-libclc's own CMake install only writes mesa-libclc.pc,
+    # so alias it to satisfy dependency('libclc').
+    pkgconfig_dir = prefix/"share/pkgconfig"
+    FileUtils.cp pkgconfig_dir/"mesa-libclc.pc", pkgconfig_dir/"libclc.pc"
+
     # 2. Setup environment variables and Meson configuration arguments
     llvm_formula = Formula["llvm@22"]
     ENV.prepend_path "PKG_CONFIG_PATH", prefix/"share/pkgconfig"
