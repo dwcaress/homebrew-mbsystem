@@ -123,6 +123,8 @@ class MbMesa < Formula
     end
   end
 
+  def python3 = "python3.14"
+
   def install
     # 1. Compile and stage custom mesa-libclc
     resource("mesa-libclc").stage do
@@ -151,6 +153,15 @@ class MbMesa < Formula
 
     # KosmicKrisp requires Metal 4 / macOS 26, see https://docs.mesa3d.org/drivers/kosmickrisp.html
     vulkan_drivers = (MacOS.version >= :tahoe) ? "kosmickrisp,swrast" : "swrast"
+
+    # Mesa's own meson.build searches PATH itself for a python3.x with mako/
+    # packaging/pyyaml importable (see its "python_exec_list" loop) - it does
+    # not know about our declared resources unless we install them somewhere
+    # on PATH ourselves. Build a venv from them and put it first on PATH.
+    venv = virtualenv_create(buildpath/"venv", python3)
+    venv.pip_install resources.reject { |r| r.name == "mesa-libclc" || (OS.mac? && r.name == "ply") }
+    ENV.prepend_path "PYTHONPATH", venv.site_packages
+    ENV.prepend_path "PATH", venv.root/"bin"
 
     # 3. Configure remaining build flags, run meson setup, compile, and install.
     args = %W[
