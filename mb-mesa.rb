@@ -31,11 +31,11 @@ class MbMesa < Formula
   depends_on "libxrender" => :build
   depends_on "libxshmfence" => :build
   depends_on "libyaml" => :build
-  
+
   depends_on "llvm@22" => :build # FIXME: https://github.com/rust-lang/rust-bindgen/issues/3397
   # Force Homebrew to inject LLVM's private pkg-config directory into the build path
   env :user_paths
-  
+
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => [:build, :test]
@@ -134,19 +134,41 @@ class MbMesa < Formula
     # Mesa 26.1.4's meson.build only probes for a pkg-config module named
     # "libclc" (later Mesa releases probe "mesa-libclc" first and fall back
     # to "libclc"). mesa-libclc's own CMake install only writes mesa-libclc.pc,
-    # so alias it to satisfy dependency('libclc').
+    # so alias it to satisfy dependency('libclc'). This stays necessary even
+    # without rusticl, because the kosmickrisp Vulkan driver (macOS Tahoe+)
+    # independently requires libclc.
     pkgconfig_dir = prefix/"share/pkgconfig"
     FileUtils.cp pkgconfig_dir/"mesa-libclc.pc", pkgconfig_dir/"libclc.pc"
 
-    # 2. Setup environment variables and Meson configuration arguments
+    # 2. Setup environment variables
     llvm_formula = Formula["llvm@22"]
     ENV.prepend_path "PKG_CONFIG_PATH", prefix/"share/pkgconfig"
     ENV.prepend_path "PKG_CONFIG_PATH", llvm_formula.opt_lib/"pkgconfig"
     ENV.prepend_path "PATH", llvm_formula.opt_bin
 
-    # Configure remaining build flags, run meson setup, compile, and install.
-    # Ensure all path adjustments point to the staged workspace paths correctly.
-    system "meson", "setup", "build", *std_meson_args
+    # Work around .../rusticl_system_bindings.h:1:10: fatal error: 'stdio.h' file not found
+    ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path
+
+    # KosmicKrisp requires Metal 4 / macOS 26, see https://docs.mesa3d.org/drivers/kosmickrisp.html
+    vulkan_drivers = (MacOS.version >= :tahoe) ? "kosmickrisp,swrast" : "swrast"
+
+    # 3. Configure remaining build flags, run meson setup, compile, and install.
+    args = %W[
+      -Db_ndebug=true
+      -Dgallium-rusticl=true
+      -Dllvm=enabled
+      -Dopengl=true
+      -Dstrip=true
+      -Dvideo-codecs=all
+      -Dgallium-drivers=llvmpipe,zink
+      -Dmoltenvk-dir=#{Formula["molten-vk"].prefix}
+      -Dtools=etnaviv,glsl,nir,nouveau,dlclose-skip
+      -Dvulkan-drivers=#{vulkan_drivers}
+      -Dvulkan-layers=intel-nullhw,overlay,screenshot,vram-report-limit
+      --force-fallback-for=syn
+    ]
+
+    system "meson", "setup", "build", *args, *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"
     system "meson", "install", "-C", "build"
   end
