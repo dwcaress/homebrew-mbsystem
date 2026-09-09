@@ -23,6 +23,12 @@ class MbMesa < Formula
   compatibility_version 1
   head "https://gitlab.freedesktop.org/mesa/mesa.git", branch: "main"
 
+  # Installs the same files as the standard "mesa" formula (bin/glsl_compiler,
+  # include/EGL/egl.h, etc.) - keep it out of HOMEBREW_PREFIX so it can't
+  # collide with mesa's symlinks. MB-System's own build should reference this
+  # keg directly via `$(brew --prefix mb-mesa)`.
+  keg_only "it installs files that conflict with the standard mesa formula"
+
   depends_on "bindgen" => :build
   depends_on "bison" => :build # can't use from macOS, needs '> 2.3'
   depends_on "cmake" => :build # for mesa-libclc
