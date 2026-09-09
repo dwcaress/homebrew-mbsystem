@@ -1,10 +1,10 @@
 class MbMesa < Formula
   include Language::Python::Virtualenv
 
-  desc "Graphics Library"
+  desc "Graphics Library (custom 26.1.4 build)"
   homepage "https://www.mesa3d.org/"
-  url "https://archive.mesa3d.org/mesa-26.2.2.tar.xz"
-  sha256 "eeb29ca7e56cfaa8e8a79538dcf834e3b18e501c31bef5145e959ea437cc4216"
+  url "https://archive.mesa3d.org/mesa-26.1.4.tar.xz"
+  sha256 "072705caa9adf4740f1489194b13e278ad959166863b5271fe423a86353c9ab6"
   license all_of: [
     "MIT",
     "Apache-2.0", # include/{EGL,GLES*,vk_video,vulkan}, src/egl/generate/egl.xml, src/mapi/glapi/registry/gl.xml
@@ -22,14 +22,6 @@ class MbMesa < Formula
   ]
   compatibility_version 1
   head "https://gitlab.freedesktop.org/mesa/mesa.git", branch: "main"
-
-  bottle do
-    sha256 arm64_tahoe:   "dbd98b3a630082cfd33e1dd45751af4eccfe610e5fedaea366aba4f711bd6523"
-    sha256 arm64_sequoia: "b37dd89aed3f02acfb78201716dcce30317dd3c83a9d0cef8176d3bca1ead9f5"
-    sha256 arm64_sonoma:  "1d4005c486575de0d028932c054b59924fb2b2404347e4cafe222c2d7679ba8e"
-    sha256 arm64_linux:   "3a97eff9252820a20a9f199457ad9aabd25849d16bcb966faeb239c42c18fb99"
-    sha256 x86_64_linux:  "9a02d335dd8104816826c7d1cda415b13235dcf3e1e09dc5365c0ee63a25d095"
-  end
 
   depends_on "bindgen" => :build
   depends_on "bison" => :build # can't use from macOS, needs '> 2.3'
