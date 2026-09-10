@@ -1,8 +1,8 @@
 class MbsystemBeta < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for beta test distributions)"
   homepage "https://www.mbari.org/technology/mb-system/"
-  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta16.tar.gz"
-  sha256 "fabd04ce4646d8d4b74da8a0894c4053291fe2b3b1c33dc02c38cf6546881937"
+  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta17.tar.gz"
+  sha256 "2bd348dfcbabfb5b96d9e4e1c820c96897eee9e5"
   license "GPL-3.0-or-later"
   head "https://github.com/dwcaress/MB-System.git", branch: "master"
 
@@ -17,8 +17,8 @@ class MbsystemBeta < Formula
   depends_on "libx11"
   depends_on "libxt"
   depends_on "openmotif"
-  depends_on "mesa"
-  depends_on "mesa-glu"
+  depends_on "dwcaress/mbsystem/mb-mesa"
+  depends_on "dwcaress/mbsystem/mb-mesa-glu"
   depends_on "opencv"
   depends_on "qt@6"
   depends_on "vtk"
