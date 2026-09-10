@@ -48,7 +48,7 @@ class MbsystemBeta < Formula
       # args << "-DVTK_MODULE_ENABLE_VTK_ViewsQt=YES"
       # args << "-DVTK_MODULE_ENABLE_VTK_GUISupportQtQuick=YES"
 
-      system "cmake", "..", *args, *std_cmake_args
+      system "cmake", *args, *std_cmake_args, ".."
       system "make"
       system "make", "install"
     end
