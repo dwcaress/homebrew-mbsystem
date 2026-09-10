@@ -30,6 +30,8 @@ class MbsystemBeta < Formula
         -DCMAKE_INSTALL_PREFIX=#{prefix}
         -DCMAKE_BUILD_TYPE=Release
         -DmacosUseMbMesa=ON
+        -DMBMESA_PREFIX=#{Formula["mb-mesa"].opt_prefix}
+        -DMBMESAGLU_PREFIX=#{Formula["mb-mesa-glu"].opt_prefix}
       ]
 
       # Enable Qt/VTK tools
@@ -77,5 +79,20 @@ class MbsystemBeta < Formula
     system "#{bin}/mbformat", "-V"
     system "#{bin}/mbinfo", "--version"
     system "#{bin}/mbsystem", "-V"
+
+    # mbgrdviz itself only links libmbview.dylib directly (no direct GL/GLU
+    # reference), so check libmbview - that's where OpenGL is actually linked
+    # - to confirm it's built against the pinned mb-mesa/mb-mesa-glu kegs, not
+    # the standard mesa/mesa-glu formulae. If this ever regresses, mesa
+    # 26.2.2's known rendering bugs (shifted 2D image, blank 3D perspective
+    # view) will silently reappear - see CMakeLists.txt's macosUseMbMesa
+    # option.
+    if OS.mac?
+      linkage = shell_output("otool -L #{lib}/libmbview.dylib")
+      assert_match "mb-mesa/", linkage
+      assert_match "mb-mesa-glu/", linkage
+      refute_match "/mesa/", linkage
+      refute_match "/mesa-glu/", linkage
+    end
   end
 end
