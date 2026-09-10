@@ -29,7 +29,7 @@ class MbsystemBeta < Formula
       args = %W[
         -DCMAKE_INSTALL_PREFIX=#{prefix}
         -DCMAKE_BUILD_TYPE=Release
-        -DmacosUseMbMesa
+        -DmacosUseMbMesa=ON
       ]
 
       # Enable Qt/VTK tools
