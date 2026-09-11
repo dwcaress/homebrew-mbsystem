@@ -1,8 +1,8 @@
 class Mbsystem < Formula
   desc "MB-System seafloor mapping data processing software"
   homepage "https://www.mbari.org/technology/mb-system/"
-  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta16.tar.gz"
-  sha256 "fabd04ce4646d8d4b74da8a0894c4053291fe2b3b1c33dc02c38cf6546881937"
+  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta20.tar.gz"
+  sha256 "0ff383c1d986cdad715b00b6f1476a6e25216699bdf20e81cc49c0f95830dc99"
   license "GPL-3.0-or-later"
   head "https://github.com/dwcaress/MB-System.git", branch: "master"
 
@@ -17,11 +17,12 @@ class Mbsystem < Formula
   depends_on "libx11"
   depends_on "libxt"
   depends_on "openmotif"
-  depends_on "mesa"
-  depends_on "mesa-glu"
+  depends_on "dwcaress/mb-mesa"
+  depends_on "dwcaress/mb-mesa-glu"
   depends_on "opencv"
   depends_on "qt@6"
   depends_on "vtk"
+  depends_on "ghostscript"
 
   def install
     # Set up build directory
