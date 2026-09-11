@@ -13,6 +13,7 @@ class MbsystemBeta < Formula
   depends_on "gdal"
   depends_on "netcdf"
   depends_on "gmt"
+  depends_on "ghostscript"
   depends_on "proj"
   depends_on "libx11"
   depends_on "libxt"
