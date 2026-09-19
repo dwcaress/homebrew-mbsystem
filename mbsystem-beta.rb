@@ -1,8 +1,8 @@
 class MbsystemBeta < Formula
   desc "MB-System seafloor mapping software (Homebrew formula for beta test distributions)"
   homepage "https://www.mbari.org/technology/mb-system/"
-  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta21.tar.gz"
-  sha256 "32f6274419660bf69948dc280e5c27026e8cc66fa5ec386b3329c8fa0fdc1c75"
+  url "https://github.com/dwcaress/MB-System/archive/refs/tags/5.8.3beta22.tar.gz"
+  sha256 "3bf95e929765fbb47b43735b578aa4bdb6be5e3cb98cc84ace00b1d9abd6ec0e"
   license "GPL-3.0-or-later"
   head "https://github.com/dwcaress/MB-System.git", branch: "master"
 
